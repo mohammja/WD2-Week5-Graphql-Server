@@ -74,7 +74,7 @@ const getSingleUser = (
 };
 
 /* test for graphql query
-mutation Mutation($user: UserInput!) {
+mutation Register($user: UserInput!) {
   register(user: $user) {
     message
     user {
@@ -94,7 +94,7 @@ const postUser = (
       .post('/graphql')
       .set('Content-type', 'application/json')
       .send({
-        query: `mutation Mutation($user: UserInput!) {
+        query: `mutation Register($user: UserInput!) {
           register(user: $user) {
             message
             user {
