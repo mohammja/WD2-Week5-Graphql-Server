@@ -37,7 +37,7 @@ import jwt from 'jsonwebtoken';
 
 describe('Testing graphql api', () => {
   beforeAll(async () => {
-    await mongoose.connect(process.env.DATABASE_URL as string);
+    await mongoose.connect(process.env.MY_DATABASE_URL as string);
   });
 
   afterAll(async () => {
