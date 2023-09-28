@@ -64,7 +64,7 @@ export default {
         });
       }
       if (user.id !== cat.owner.toString() && user.role !== 'admin') {
-        throw new GraphQLError('Unauthorized', {
+        throw new GraphQLError('Unauthorized!', {
           extensions: {code: 'UNAUTHORIZED'},
         });
       }
