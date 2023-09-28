@@ -33,15 +33,30 @@ app.use(express.json());
 (async () => {
   try {
     // TODO Create a rate limit rule instance
+    const rateLimitRule = createRateLimitRule({
+      identifyContext: (ctx) => ctx.id,
+    });
 
     // TODO Create a permissions object
+    const permissions = shield({
+      Mutation: {
+        login: rateLimitRule({window: '3s', max: 5}),
+      },
+    });
 
     // TODO Apply the permissions object to the schema
     // remember to change the typeDefs and resolvers to a schema object
 
+    const schema = applyMiddleware(
+      makeExecutableSchema({
+        typeDefs,
+        resolvers,
+      }),
+      permissions
+    );
+
     const server = new ApolloServer<MyContext>({
-      typeDefs,
-      resolvers,
+      schema,
       introspection: true,
       plugins: [
         process.env.NODE_ENV === 'production'
@@ -56,6 +71,8 @@ app.use(express.json());
 
     app.use(
       '/graphql',
+      express.json(),
+      cors<cors.CorsRequest>(),
       expressMiddleware(server, {
         context: async ({req}) => authenticate(req),
       })

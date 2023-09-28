@@ -5,7 +5,7 @@ import {Point} from 'geojson';
 interface Cat extends Document {
   cat_name: string;
   weight: number;
-  owner: Types.ObjectId | User;
+  owner: Types.ObjectId | User | string;
   filename: string;
   birthdate: Date;
   location: Point;
