@@ -6,7 +6,7 @@ name: Build and deploy Node.js app to Azure Web App - ilkkamtk-sssf-week3
 on:
   push:
     branches:
-      - week-4-5-graphql-server
+      - main
   workflow_dispatch:
 
 jobs:
