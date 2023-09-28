@@ -1,5 +1,3 @@
-/* eslint-disable node/no-extraneous-import */
-require('dotenv').config();
 import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
@@ -17,6 +15,7 @@ import {MyContext} from './interfaces/MyContext';
 import {createRateLimitRule} from 'graphql-rate-limit';
 import {shield} from 'graphql-shield';
 import {makeExecutableSchema} from '@graphql-tools/schema';
+// eslint-disable-next-line node/no-extraneous-import
 import {applyMiddleware} from 'graphql-middleware';
 
 const app = express();
@@ -71,8 +70,6 @@ app.use(express.json());
 
     app.use(
       '/graphql',
-      express.json(),
-      cors<cors.CorsRequest>(),
       expressMiddleware(server, {
         context: async ({req}) => authenticate(req),
       })
